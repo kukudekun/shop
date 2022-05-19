@@ -1,32 +1,29 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <div>
+    <Header></Header>
+    <router-view></router-view>
+    <!-- 在登陆注册是隐藏的 -->
+    <Footer v-show="$route.meta.show"></Footer>
+
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import Header from '@/components/Header/header-vue.vue'
+import Footer from '@/components/Footer/footer-vue.vue'
+export default {
+  name: 'APP',
+  components: {
+    Header,
+    Footer
+  },
+  mounted () {
+    // 派发一个action 获取商品分类的三级列表数据
+    this.$store.dispatch('categoryList')
   }
 }
+</script>
+
+<style>
+
 </style>
